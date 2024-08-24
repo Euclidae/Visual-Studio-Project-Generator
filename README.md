@@ -1,0 +1,1 @@
+Funny story. My computer programming lecturer apparently made it compulsory to use Visual Studio. I don't wanna use Visual Studio... that's it. What else is there to say I wonder. The input part where it tells put in the version, put in official versions please. I don't feel like maintaining this... like at all. Thank you.
