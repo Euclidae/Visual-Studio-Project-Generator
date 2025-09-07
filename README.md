@@ -1,32 +1,41 @@
-# Visual Studio Project Generator 🚀
+# Visual Studio Project Generator
 
-A powerful and user-friendly tool for generating Visual Studio C++ projects with both GUI and CLI interfaces. Say goodbye to compulsory Visual Studio projects by lecturers and project directors.
-# GUI Version
+A tool for generating Visual Studio C++ projects with both GUI and CLI interfaces.
+
 ![image](https://github.com/user-attachments/assets/f1505286-94a7-481a-b342-8325dd835d67)
 
-## ✨ Features
+## Features
 
-- 🖥️ Intuitive GUI interface built with CustomTkinter
-- 🎯 Support for multiple Visual Studio versions (2017, 2019, 2022)
-- 💻 x86 and x64 architecture support (GUI)
-- 📁 Automatic project structure generation
-- 🛠️ Configurable file extensions (.cpp, .cxx)
-- 💡 Built-in C++ tips and motivational messages in generated code
-- 🎨 Dark mode interface
+- GUI interface built with CustomTkinter
+- Support for multiple Visual Studio versions (2017, 2019, 2022)
+- x86 and x64 architecture support (GUI)
+- Automatic project structure generation
+- Configurable file extensions (.cpp, .cxx)
+- Dark mode interface
 
-## 🚀 Quick Start
+## Installation
 
-### Prerequisites
+### Automatic Installation
 
+**Windows:**
+Run `install.bat`
+
+**Linux/Mac:**
+Run `./install.sh`
+
+**Cross-platform:**
+Run `python setup.py`
+
+### Manual Installation
 ```bash
-pip install customtkinter
+pip install -r requirements.txt
 ```
 
 ### GUI Version
 
 1. Run the GUI version:
 ```bash
-python vs_project_generator_gui.py
+python GUIprojBuilder.py
 ```
 
 2. Fill in the project details:
@@ -36,17 +45,46 @@ python vs_project_generator_gui.py
    - File Extension
    - Save Location
 
-3. Click "Generate Project" and you're done! 🎉
+3. Click "Generate Project"
 
 ### CLI Version
 
-Generate a project using command-line arguments:
-
 ```bash
-python vs_project_generator_cli.py --name MyProject --vs-version "Visual Studio 2022" --arch x64 --ext .cpp --path C:\Projects
+python CLIprojBuilder.py
 ```
 
-## 📂 Generated Project Structure
+The CLI version uses `template.txt` for configuration:
+1. Edit `template.txt` with your project settings (4 lines exactly):
+   - Line 1: Project name
+   - Line 2: VS version (2017/2019/2022) 
+   - Line 3: Architecture (x86/x64)
+   - Line 4: File extension (.cpp/.cxx)
+2. Run the script
+
+### Android Users
+
+The CLI version works on Android without console input. Choose one of these options:
+
+#### Option 1: Termux (Terminal-based)
+1. Install Termux from F-Droid or Google Play
+2. Update packages: `pkg update && pkg upgrade`
+3. Install Python: `pkg install python`
+4. Install git: `pkg install git`
+5. Clone/download this project
+6. Edit `template.txt` with any text editor app
+7. Run: `python CLIprojBuilder.py`
+
+#### Option 2: Pydroid 3 (GUI-based)
+1. Install Pydroid 3 from Google Play
+2. Download/extract this project to your device
+3. Open Pydroid 3 and navigate to the project folder
+4. Edit `template.txt` using Pydroid's built-in editor or any text editor
+5. Open `CLIprojBuilder.py` in Pydroid 3
+6. Tap the play button to run the script
+
+Note: Generated projects are for Windows Visual Studio, but you can create the project structure on Android and transfer files later.
+
+## Generated Project Structure
 
 ```
 ProjectName/
@@ -60,24 +98,24 @@ ProjectName/
 └── ProjectName.sln
 ```
 
-## 🛠️ Project Configuration
+## Project Configuration
 
 The generator supports:
 
-- **Visual Studio Versions**
-  - Visual Studio 2017
-  - Visual Studio 2019
-  - Visual Studio 2022
+**Visual Studio Versions:**
+- Visual Studio 2017
+- Visual Studio 2019
+- Visual Studio 2022
 
-- **Architectures**
-  - x86 (32-bit)
-  - x64 (64-bit)
+**Architectures:**
+- x86 (32-bit)
+- x64 (64-bit)
 
-- **File Extensions**
-  - .cpp
-  - .cxx
+**File Extensions:**
+- .cpp
+- .cxx
 
-## 💡 Generated Code Features
+## Generated Code Features
 
 - Pre-configured project settings
 - Standard C++ includes
@@ -86,33 +124,27 @@ The generator supports:
 - Modern C++ practices
 - Ready-to-build configuration
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Here's how you can help:
+Standard steps. Don't worry about it.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
+## License
 MIT License
-## 🙏 Acknowledgments
+
+## Acknowledgments
 
 - CustomTkinter for the modern GUI elements
 - Visual Studio for the project templates
-- Python community for inspiration and support
 
-## 📞 Contact
 
-For questions, suggestions, or issues, please:
+## Contact
+
+For questions, suggestions, or issues:
 1. Open an issue in this repository
 2. Submit a pull request
 3. Start a discussion in the Discussions tab
 
 ---
 
-Made with ❤️ by [Euclidae]
-
-*Remember to star ⭐ this repository if you find it helpful!*
+Made by [Euclidae]
+p.s README.md is generated by AI because I am a lazy [REDACTED]. Updating it was a pain in it of itself.
