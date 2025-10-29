@@ -1,21 +1,19 @@
 import os
-import random
 import uuid
 
+visual_studio_versions = ('2017', "2019", '2022')
+architectures = ('x86','x64')
+formats = ('.cpp', '.cxx')
+
 def load_config_from_file(filename="template.txt"):
-    """Load project configuration from template.txt file"""
     if not os.path.exists(filename):
         return None
     
     try:
         with open(filename, 'r') as f:
             lines = [line.strip() for line in f.readlines() if line.strip()]
-        
-        # Check if file is empty
         if not lines:
             return None
-            
-        # Must have exactly 4 lines
         if len(lines) != 4:
             print(f"template.txt must have exactly 4 lines: project name, VS version, architecture, file extension")
             return None
@@ -85,6 +83,7 @@ Global
         SolutionGuid = {{{str(uuid.uuid4()).upper()}}}
     EndGlobalSection
 EndGlobal"""
+
     
     with open(os.path.join(project_path, f"{project_name}.sln"), "w") as f:
         f.write(content)
@@ -96,8 +95,7 @@ def generate_vcxproj_files(project_path, project_name, vs_version, architecture,
         "2019": "v142", 
         "2022": "v143"
     }
-    
-    # Main .vcxproj file
+ 
     vcxproj_content = f"""<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
@@ -237,7 +235,6 @@ def generate_vcxproj_files(project_path, project_name, vs_version, architecture,
     with open(os.path.join(project_path, project_name, f"{project_name}.vcxproj"), "w") as f:
         f.write(vcxproj_content)
 
-    # .vcxproj.filters file
     filters_content = f"""<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
@@ -264,7 +261,6 @@ def generate_vcxproj_files(project_path, project_name, vs_version, architecture,
     with open(os.path.join(project_path, project_name, f"{project_name}.vcxproj.filters"), "w") as f:
         f.write(filters_content)
 
-    # .vcxproj.user file
     user_content = """<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
@@ -289,8 +285,7 @@ int main() {
 def main():
     print("Visual Studio Project Generator - CLI Version")
     print("=" * 45)
-    
-    # template.txt must always exist - check if it's populated
+
     config = load_config_from_file()
     
     if config:
@@ -305,7 +300,6 @@ def main():
         print(f"Architecture: {architecture}")
         print(f"File Extension: {file_type}")
     else:
-        # template.txt is empty - show format and exit
         print("template.txt is empty - please edit it with your settings")
         print("Format (4 lines exactly):")
         print("  Line 1: Project name")
@@ -313,25 +307,23 @@ def main():
         print("  Line 3: Architecture (x86/x64)")
         print("  Line 4: File extension (.cpp/.cxx)")
         return
-
-    # Validate inputs
-    if vs_version not in ['2017', '2019', '2022']:
-        print(f"Invalid VS version '{vs_version}', using 2022")
-        vs_version = '2022'
-    if architecture not in ['x86', 'x64']:
+        
+    
+    if vs_version not in visual_studio_versions:
+        print(f"Invalid VS version '{vs_version}', using 2017") # changed from 22 to 17 because uni students usually have bad devices
+        vs_version = '2017'
+    if architecture not in architectures:
         print(f"Invalid architecture '{architecture}', using x64")
         architecture = 'x64'
-    if file_type not in ['.cpp', '.cxx']:
+    if file_type not in formats:
         print(f"Invalid file extension '{file_type}', using .cpp")
         file_type = '.cpp'
 
-    # Create project in same directory as script
     project_path = os.path.join(".", project_name)
     os.makedirs(project_path, exist_ok=True)
     os.makedirs(os.path.join(project_path, project_name), exist_ok=True)
     os.makedirs(os.path.join(project_path, architecture, "Debug"), exist_ok=True)
 
-    # Generate files
     project_guid = generate_sln_file(project_path, project_name, vs_version)
     generate_vcxproj_files(project_path, project_name, vs_version, architecture, file_type, project_guid)
     generate_main_file(project_path, project_name, file_type)
